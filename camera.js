@@ -1,55 +1,41 @@
 function Camera(model){
     Service.call(this, model);
-    this._stateCamera = state;
-    this._recordType = recordType;
-    this._recordMode = recordMode;
+    this._recordType = "";
+    this._recordMode = "";
+}
 
-    this.on = function(){
-        this._stateCamera = true;
-    }
+    Camera.prototype = Object.create(Service.prototype);
+    Camera.prototype.constructor = Camera;
 
-    this.off = function(){
-        this._stateCamera = false;
-    }
-
-   this.record = function(){
-       if((this._state == true) && (this._stateCamera == true)){
-           this._recordType = true;
-           alert('Включен тип записи "record"');
+    Camera.prototype.record = function(){
+       if(this._state){
+           this._recordType = "Record";
        }
    }
 
-   this.live = function(){
-        if((this._state == true) && (this._stateCamera == true)){
-            this._recordType = false;
-            alert('Включен тип записи "live"');
+   Camera.prototype.live = function(){
+        if(this._state){
+            this._recordType = "Live";
         }
     }
 
-    this.dayMode = function(){
-        if((this._state == true) && (this._stateCamera == true)){
-            this._recordMode = true;
-            alert('Включен дневной режим записи');
+    Camera.prototype.dayMode = function(){
+        if(this._state){
+            this._recordMode = "Дневной";
         }
     }
 
-    this.nightMode = function(){
-        if((this._state == true) && (this._stateCamera == true)){
-            this._recordMode = false;
-            alert('Включен ночной режим записи');
+    Camera.prototype.nightMode = function(){
+        if(this._state){
+            this._recordMode = "Ночной";
         }
     }
 
-    this.getState = function(){
-        return this._stateCamera;
-    }
-
-    this.getRecordType = function(){
+    Camera.prototype.getRecordType = function(){
         return this._recordType;
     }
 
-    this.getRecordMode = function(){
+    Camera.prototype.getRecordMode = function(){
         return this.recordMode;
     }
 
-}
