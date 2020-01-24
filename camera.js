@@ -21,13 +21,13 @@ function Camera(model){
 
     Camera.prototype.dayMode = function(){
         if(this._state){
-            this._recordMode = "Дневной";
+            this._recordMode = "Day";
         }
     }
 
     Camera.prototype.nightMode = function(){
         if(this._state){
-            this._recordMode = "Ночной";
+            this._recordMode = "Night";
         }
     }
 

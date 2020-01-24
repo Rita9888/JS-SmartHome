@@ -9,30 +9,31 @@ ViewConditioner.prototype.constructor = ViewConditioner;
 
 ViewConditioner.prototype.stateChange = function(){
     if(this._conditioner._state){
-        this._state.innerHTML = "Кондиционер вкл";
+        this._state.innerHTML = "Conditioner: on";
     }
     else{
-        this._state.innerHTML = "Кондиционер выкл";
+        this._state.innerHTML = "Conditioner: off";
     };
 };
 
 ViewConditioner.prototype.render = function(){
-    var name = document.createElement("div");
-    name.innerHTML = "Кондиционер";
+    var name = document.createElement("h3");
+    name.innerHTML = "Conditioner";
 
-    var temp = document.createElement("div");
-    temp.innerHTML = "Темепратура = " + this._conditioner._currentTemperature;
-
+    var temp = document.createElement("p");
+    temp.innerHTML = this._conditioner._currentTemperature +"°C";
+    temp.className = "temp";
+        
     var condition = document.createElement("div");
     condition.className = "cond";
 
-    var model = document.createElement("div");
-    model.innerHTML = "Модель " + this._conditioner._model;
+    var model = document.createElement("p");
+    model.innerHTML = "Model: " + this._conditioner._model;
 
     var onBtn = document.createElement("button");
     onBtn.type = "button";
     onBtn.className = "on";
-    onBtn.innerHTML = "Включить";
+    onBtn.innerHTML = "ON";
     onBtn.addEventListener('click', () =>{
         this._conditioner.on();
         this.stateChange();
@@ -41,7 +42,7 @@ ViewConditioner.prototype.render = function(){
     var offBtn = document.createElement("button");
     offBtn.type = "button";
     offBtn.className = "off";
-    offBtn.innerHTML = "Выключить";
+    offBtn.innerHTML = "OFF";
     offBtn.addEventListener('click', () =>{
         this._conditioner.off();
         this.stateChange();
@@ -53,7 +54,7 @@ ViewConditioner.prototype.render = function(){
     plusTemperature.innerHTML = "+";
     plusTemperature.addEventListener('click', () =>{
         this._conditioner.plusTemp();
-        temp.innerHTML = "Температура = " + this._conditioner._currentTemperature;
+        temp.innerHTML = this._conditioner._currentTemperature +"°C";
     })
 
     var minusTemperature = document.createElement("button");
@@ -62,14 +63,17 @@ ViewConditioner.prototype.render = function(){
     minusTemperature.innerHTML = "-";
     minusTemperature.addEventListener('click', () =>{
         this._conditioner.minusTemp();
-        temp.innerHTML = "Температура = " + this._conditioner._currentTemperature;
+        temp.innerHTML = this._conditioner._currentTemperature +"°C";
     });
+
+    var content = document.getElementsByClassName("container")[0];
+    content.appendChild(this._rootAdd);
 
     this.stateChange();
     condition.appendChild(name);
+    condition.appendChild(model);
     condition.appendChild(this._state);
     condition.appendChild(temp);
-    condition.appendChild(model);
     condition.appendChild(onBtn);
     condition.appendChild(offBtn);
     condition.appendChild(plusTemperature);

@@ -9,35 +9,39 @@ ViewSignaling.prototype.constructor = ViewSignaling;
 
 ViewSignaling.prototype.stateChange = function(){
     if(this._signaling._state){
-        this._state.innerHTML = "Сигнализация вкл";
+        this._state.innerHTML = "Signaling: on";
     }
     else{
-        this._state.innerHTML = "Сигнализация выкл";
+        this._state.innerHTML = "Signaling: off";
     }
 };
 
 ViewSignaling.prototype.render = function(){
-    var name = document.createElement("div");
-    name.innerHTML = "Сигнализация";
+    var name = document.createElement("h3");
+    name.innerHTML = "Signaling";
 
-    var signal = document.createElement("div");
+    var signal = document.createElement("p");
     signal.className = "signal";
 
     var btnOn = document.createElement("button");
-    btnOn.className = "signBtn";
-    btnOn.innerHTML = "Включить";
+    btnOn.className = "on";
+    btnOn.innerHTML = "ON";
     btnOn.addEventListener("click", () =>{
         this._signaling.on();
         this.stateChange();
     });
 
     var btnOff = document.createElement("button");
-    btnOff.className = "signBtn";
-    btnOff.innerHTML = "Выключить";
+    btnOff.className = "off";
+    btnOff.innerHTML = "OFF";
     btnOff.addEventListener("click", () =>{
         this._signaling.passwCheck();
         this.stateChange();
     });
+
+    var content = document.getElementsByClassName("container")[0];
+    content.appendChild(this._rootAdd);
+
 
     this.stateChange();
     signal.appendChild(name);
